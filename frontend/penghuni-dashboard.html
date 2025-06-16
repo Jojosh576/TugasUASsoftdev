@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Penghuni</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="dashboard penghuni-theme">
+    <div id="overlay"></div>
+    <div class="dashboard-container">
+        <div class="sidebar" id="sidebar">
+            <a href="javascript:void(0)" class="close-btn" id="closeBtn">&times;</a>
+            <h3>Kos Mami Sindu</h3>
+            <nav>
+                <a href="#" onclick="showSection('riwayat')" class="nav-link active">Pembayaran</a>
+                <a href="#" onclick="showSection('ajuan')" class="nav-link">Ajuan</a>
+                <a href="#" onclick="logout()" class="nav-link">Logout</a>
+            </nav>
+        </div>
+        
+        <div class="main-content">
+            <div class="header">
+                <button class="hamburger-btn" id="hamburgerBtn">&#9776;</button>
+                <h2 id="pageTitle">Pembayaran</h2>
+                <div class="user-info">
+                    <span id="userName">Penghuni</span>
+                    <div class="profile-icon">
+                        <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="riwayatSection" class="content-section active">
+                <div class="form-box">
+                    <h3>Form Pembayaran Kost</h3>
+                    <form id="pembayaranForm">
+                        <input type="hidden" id="pembayaran_penghuni_id">
+                        <input type="hidden" id="pembayaran_kamar_id">
+                        <div class="form-group">
+                            <label>Tarif per Bulan</label>
+                            <input type="text" id="pembayaran_tarif" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Tanggal Pembayaran</label>
+                            <input type="date" id="pembayaran_tanggal" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Upload Bukti Transfer</label>
+                            <input type="file" id="pembayaran_bukti" required accept="image/*">
+                        </div>
+                        <button type="submit" class="btn-submit penghuni-btn">Kirim Pembayaran</button>
+                    </form>
+                </div>
+
+                <h3 style="margin-top: 2rem; border-top: 1px solid #eee; padding-top: 1.5rem;">Riwayat Pembayaran</h3>
+                <div class="table-container" id="pembayaranTableContainer">
+                    <table id="riwayatTable">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Kode Sewa</th>
+                                <th>Kamar</th>
+                                <th>Tarif</th>
+                                <th>Status</th>
+                                <th>Bukti</th>
+                                <th>Tanggal</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div id="ajuanSection" class="content-section">
+                <div class="table-header">
+                    <button class="btn-add penghuni-btn" onclick="showAddAjuanModal()">Tambah Ajuan</button>
+                </div>
+                <div class="table-container">
+                    <table id="ajuanTable">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Jenis Ajuan</th>
+                                <th>Deskripsi</th>
+                                <th>Status</th>
+                                <th>Tanggal</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="ajuanModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Tambah Ajuan Baru</h3>
+                <span class="close" onclick="closeModal('ajuanModal')">&times;</span>
+            </div>
+            <form id="ajuanForm">
+                <div class="form-group">
+                    <label>Jenis Ajuan</label>
+                    <select id="jenis_ajuan" required>
+                        <option value="">Pilih Jenis Ajuan</option>
+                        <option value="Perbaikan AC">Perbaikan AC</option>
+                        <option value="Perbaikan Kamar Mandi">Perbaikan Kamar Mandi</option>
+                        <option value="Ganti Kunci">Ganti Kunci</option>
+                        <option value="Keluhan Listrik">Keluhan Listrik</option>
+                        <option value="Keluhan Air">Keluhan Air</option>
+                        <option value="Lainnya">Lainnya</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Deskripsi</label>
+                    <textarea id="deskripsi" placeholder="Jelaskan detail ajuan Anda..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Tanggal Ajuan</label>
+                    <input type="date" id="tanggal_ajuan" required>
+                </div>
+                <button type="submit" class="btn-submit penghuni-btn">Kirim Ajuan</button>
+            </form>
+        </div>
+    </div>
+    <script src="js/main.js"></script>
+</body>
+</html>
